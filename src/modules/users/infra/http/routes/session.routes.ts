@@ -1,24 +1,14 @@
 import { Router } from 'express';
-import { container } from 'tsyringe';
 
-import AuthenticateUserService from '@modules/users/services/AuthenticateUserService';
+import SessionController from '../controllers/SessionController';
 
 const sessionsRouter = Router();
+const sessionController = new SessionController();
 
 // DTO Data Transfer Object
 
 // Rota deve receber a requisição, chamar outro arquivo e devolver uma resposta
 
-sessionsRouter.post('/', async (request, response) => {
-  const { email, password } = request.body;
-
-  const authenticateUser = container.resolve(AuthenticateUserService);
-
-  const { user, token } = await authenticateUser.execute({ email, password });
-
-  delete user.password;
-
-  return response.json({ user, token });
-});
+sessionsRouter.post('/', sessionController.create);
 
 export default sessionsRouter;
