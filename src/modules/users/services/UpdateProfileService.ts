@@ -5,7 +5,6 @@ import { injectable, inject } from 'tsyringe';
 import User from '../infra/typeorm/entities/User';
 import IUsersRepository from '../repositories/iUsersRepository';
 import IHashProvider from '@modules/users/providers/HashProvider/models/IHashProvider';
-import { check } from 'prettier';
 
 interface Request {
   user_id: string;
@@ -16,7 +15,7 @@ interface Request {
 }
 
 @injectable()
-class UpdateProfile {
+class UpdateProfileService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -68,4 +67,4 @@ class UpdateProfile {
   }
 }
 
-export default UpdateProfile;
+export default UpdateProfileService;
